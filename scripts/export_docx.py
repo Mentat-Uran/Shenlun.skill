@@ -35,6 +35,47 @@ def set_cell_shading(cell, color):
     shading_elm.append(shading)
 
 
+def set_cell_vertical_align(cell, align='center'):
+    """设置单元格垂直居中"""
+    tc = cell._element
+    tcPr = tc.get_or_add_tcPr()
+    vAlign = OxmlElement('w:vAlign')
+    vAlign.set(qn('w:val'), align)
+    tcPr.append(vAlign)
+
+
+def set_cell_width(cell, width):
+    """设置单元格宽度"""
+    tc = cell._element
+    tcPr = tc.get_or_add_tcPr()
+    tcW = OxmlElement('w:tcW')
+    tcW.set(qn('w:w'), str(width))
+    tcW.set(qn('w:type'), 'dxa')
+    tcPr.append(tcW)
+
+
+def estimate_col_widths(headers, rows):
+    """根据表头和第一行数据估算列宽（dxa单位，1cm≈567dxa）"""
+    n = len(headers)
+    text_lens = []
+    for j in range(n):
+        max_len = len(headers[j])
+        for row in rows[:3]:  # 只取前3行估算
+            if j < len(row):
+                max_len = max(max_len, len(row[j]))
+        text_lens.append(max_len)
+
+    # 总可用宽度约13cm（A4 21cm - 左右边距约4cm - 留白），即约7400 dxa
+    total_width = 7400
+    # 按字符数比例分配
+    total_len = sum(text_lens) or 1
+    widths = [max(int(total_width * l / total_len), 800) for l in text_lens]
+    # 确保不超总宽
+    factor = total_width / sum(widths)
+    widths = [int(w * factor) for w in widths]
+    return widths
+
+
 def set_paragraph_shading(paragraph, color):
     """设置段落底色"""
     pPr = paragraph._element.get_or_add_pPr()
@@ -56,30 +97,41 @@ def add_markdown_table(doc, lines, start_idx):
         rows.append(row)
         i += 1
 
+    col_widths = estimate_col_widths(headers, rows)
+
     table = doc.add_table(rows=1 + len(rows), cols=len(headers))
     table.style = 'Table Grid'
+    table.autofit = False
 
-    # 表头 — 深蓝底白字，居中
+    # 表头 — 深蓝底白字，水平居中 + 垂直居中
     for j, header in enumerate(headers):
         cell = table.rows[0].cells[j]
         cell.text = ''
         p = cell.paragraphs[0]
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.space_before = Pt(2)
+        p.paragraph_format.space_after = Pt(2)
         run = p.add_run(header)
         run.bold = True
-        run.font.size = Pt(11)
+        run.font.size = Pt(10)
         set_cell_shading(cell, '2F5496')
         run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+        set_cell_vertical_align(cell, 'center')
+        set_cell_width(cell, col_widths[j])
 
-    # 数据行 — 居中
+    # 数据行 — 水平居中 + 垂直居中，字体略小
     for r, row in enumerate(rows):
         for c, val in enumerate(row):
             cell = table.rows[r + 1].cells[c]
             cell.text = ''
             p = cell.paragraphs[0]
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p.paragraph_format.space_before = Pt(1)
+            p.paragraph_format.space_after = Pt(1)
             run = p.add_run(val)
-            run.font.size = Pt(11)
+            run.font.size = Pt(9)
+            set_cell_vertical_align(cell, 'center')
+            set_cell_width(cell, col_widths[c])
 
     doc.add_paragraph()
     return i
@@ -197,7 +249,7 @@ def convert_md_to_docx(input_path: str, output_path: str):
             if highlight_mode:
                 flush_highlight_buffer()
                 highlight_mode = False
-            p = doc.add_paragraph('—' * 40)
+            p = doc.add_paragraph('—' * 20)
             for run in p.runs:
                 run.font.size = Pt(12)
             i += 1
