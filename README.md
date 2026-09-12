@@ -74,7 +74,7 @@ shenlun-master/
 ├── references/
 │   ├── scoring-rules.md                  # 评分方法 + 精简/详细格式模板
 │   ├── writing-rules.md                  # 作答铁律（7条）+ 版本差异
-│   ├── image-reading-rules.md            # 图片识读规范（5步流程 + 降级路径）
+│   ├── image-reading-rules.md            # 图片识读规范（6步流程 + 语言错误清单规范）
 │   ├── xiaoma-methodology.md             # 小马哥方法论
 │   ├── bai-lu-methodology.md             # 白鹭方法论
 │   ├── yuan-dong-methodology.md          # 袁东大作文方法论

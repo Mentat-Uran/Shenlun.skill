@@ -186,7 +186,7 @@ description: >
 |------|------|
 | `references/scoring-rules.md` | 完整评分方法（Step 0-5）、什么不算扣分点、精简+详细格式模板 |
 | `references/writing-rules.md` | 小题作答铁律（7条）、版本差异定位、材料分析信号词 |
-| `references/image-reading-rules.md` | 图片识读规范（5步流程、易错点自检、降级路径） |
+| `references/image-reading-rules.md` | 图片识读规范（6步流程、易错点自检、语言错误清单输出规范、降级路径） |
 | `references/xiaoma-methodology.md` | 小马哥小题方法论 |
 | `references/bai-lu-methodology.md` | 白鹭小题方法论 |
 | `references/yuan-dong-methodology.md` | 袁东大作文方法论 |
