@@ -10,3 +10,7 @@ _sources/
 
 # 临时目录
 .tmppip/
+
+# 网页版是**独立的项目**，有自己的仓库（见 shenlun-web/.git），不随 skill 一起发布。
+# 它对 skill 的依赖是单向只读的：构建时读 SKILL.md 与 references/，从不写回。
+shenlun-web/
