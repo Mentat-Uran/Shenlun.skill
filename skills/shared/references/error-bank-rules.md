@@ -56,7 +56,7 @@
 > - **`C5`**＝层次关系**有（三层结构正确），但第三层内部没写好**
 >
 > **`C5` 使用前必须先判主题类型**：确认是双主题并判出 AB／ABC 型，才能说"第三层"。
-> **不得用「分分总」这类通用文章学术语**——见 `references/yuan-dong-methodology.md` 6.5。
+> **不得用「分分总」这类通用文章学术语**——见 `../../shenlun-dawenti/references/yuan-dong-methodology.md` 6.5。
 
 ### D 要素类
 

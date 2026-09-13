@@ -75,7 +75,7 @@
 
 ## 五、与改进建议的衔接
 
-本模式只负责**评分**。**改进建议部分按 `references/expression-upgrade-rules.md` 第六节的五段式格式输出**：
+本模式只负责**评分**。**改进建议部分按 `../../shared/references/expression-upgrade-rules.md` 第六节的五段式格式输出**：
 
 1. 必须补的失分点
 2. 表述升级（口语化 → 申论规范）
