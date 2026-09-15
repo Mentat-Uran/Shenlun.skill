@@ -373,6 +373,16 @@ shenlun-master/
 | 2026-05-12 | `.docx` 导出改为按需触发，默认对话输出，节省 token |
 | 2026-05-09 | 首次发布：小题双视角批改 + 大作文袁东框架 + 命题预判 + docx 导出 |
 
+## Star History
+
+<a href="https://www.star-history.com/?repos=coffe-d%2Fshenlun.skill&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=coffe-d/shenlun.skill&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=coffe-d/shenlun.skill&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=coffe-d/shenlun.skill&type=date&legend=top-left" />
+ </picture>
+</a>
+
 ## License
 
 [MIT](LICENSE) © 2026 coffe-d
